@@ -21,24 +21,24 @@ set(DMTX_EXTRA_DEPENDENCY
     ${CMAKE_SOURCE_DIR}/dmtxencode.c
     ${CMAKE_SOURCE_DIR}/dmtxencodestream.c
     ${CMAKE_SOURCE_DIR}/dmtxencodescheme.c
-	${CMAKE_SOURCE_DIR}/dmtxencodeoptimize.c
+    ${CMAKE_SOURCE_DIR}/dmtxencodeoptimize.c
     ${CMAKE_SOURCE_DIR}/dmtxencodeascii.c
     ${CMAKE_SOURCE_DIR}/dmtxencodec40textx12.c
-	${CMAKE_SOURCE_DIR}/dmtxencodeedifact.c
+    ${CMAKE_SOURCE_DIR}/dmtxencodeedifact.c
     ${CMAKE_SOURCE_DIR}/dmtxencodebase256.c
     ${CMAKE_SOURCE_DIR}/dmtxdecode.c
     ${CMAKE_SOURCE_DIR}/dmtxdecodescheme.c
-	${CMAKE_SOURCE_DIR}/dmtxmessage.c
+    ${CMAKE_SOURCE_DIR}/dmtxmessage.c
     ${CMAKE_SOURCE_DIR}/dmtxregion.c
     ${CMAKE_SOURCE_DIR}/dmtxsymbol.c
     ${CMAKE_SOURCE_DIR}/dmtxplacemod.c
     ${CMAKE_SOURCE_DIR}/dmtxreedsol.c
-	${CMAKE_SOURCE_DIR}/dmtxscangrid.c
+    ${CMAKE_SOURCE_DIR}/dmtxscangrid.c
     ${CMAKE_SOURCE_DIR}/dmtximage.c
     ${CMAKE_SOURCE_DIR}/dmtxbytelist.c
     ${CMAKE_SOURCE_DIR}/dmtxtime.c
     ${CMAKE_SOURCE_DIR}/dmtxvector2.c
-	${CMAKE_SOURCE_DIR}/dmtxmatrix3.c
+    ${CMAKE_SOURCE_DIR}/dmtxmatrix3.c
     ${CMAKE_SOURCE_DIR}/dmtxstatic.h
 )
 
