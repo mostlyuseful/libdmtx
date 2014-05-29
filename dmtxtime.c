@@ -23,7 +23,7 @@
  * \brief  GETTIMEOFDAY version
  * \return Time now
  */
-extern DmtxTime
+DmtxTime
 dmtxTimeNow(void)
 {
    DmtxPassFail err;
@@ -49,7 +49,7 @@ dmtxTimeNow(void)
  * \brief  MICROSOFT VC++ version
  * \return Time now
  */
-extern DmtxTime
+DmtxTime
 dmtxTimeNow(void)
 {
    FILETIME ft;
@@ -78,7 +78,7 @@ dmtxTimeNow(void)
  * \brief  Generic 1 second resolution version
  * \return Time now
  */
-extern DmtxTime
+DmtxTime
 dmtxTimeNow(void)
 {
    time_t s;
@@ -102,7 +102,7 @@ dmtxTimeNow(void)
  * \param  msec
  * \return Adjusted time
  */
-extern DmtxTime
+DmtxTime
 dmtxTimeAdd(DmtxTime t, long msec)
 {
    int usec;
@@ -131,7 +131,7 @@ dmtxTimeAdd(DmtxTime t, long msec)
  * \param  timeout
  * \return 1 (true) | 0 (false)
  */
-extern int
+int
 dmtxTimeExceeded(DmtxTime timeout)
 {
    DmtxTime now;

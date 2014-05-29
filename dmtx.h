@@ -14,6 +14,22 @@
 #ifndef __DMTX_H__
 #define __DMTX_H__
 
+#   if (defined(WINDOWS) || defined(WIN32)) && !defined(DMTX_STATIC)
+#       ifndef DMTX_DECL
+#           ifdef DMTX_BUILD_DLL
+            /* We are building this library */
+#           define DMTX_DECL __declspec(dllexport)
+#           else
+            /* We are using this library */
+#           define DMTX_DECL __declspec(dllimport)
+#           endif
+#       endif
+#   else
+#       ifndef DMTX_DECL
+#       define DMTX_DECL 
+#       endif
+#   endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -520,103 +536,103 @@ typedef struct DmtxQuadruplet_struct {
 } DmtxQuadruplet;
 
 /* dmtxtime.c */
-extern DmtxTime dmtxTimeNow(void);
-extern DmtxTime dmtxTimeAdd(DmtxTime t, long msec);
-extern int dmtxTimeExceeded(DmtxTime timeout);
+DMTX_DECL DmtxTime dmtxTimeNow(void);
+DMTX_DECL DmtxTime dmtxTimeAdd(DmtxTime t, long msec);
+DMTX_DECL int dmtxTimeExceeded(DmtxTime timeout);
 
 /* dmtxencode.c */
-extern DmtxEncode *dmtxEncodeCreate(void);
-extern DmtxPassFail dmtxEncodeDestroy(DmtxEncode **enc);
-extern DmtxPassFail dmtxEncodeSetProp(DmtxEncode *enc, int prop, int value);
-extern int dmtxEncodeGetProp(DmtxEncode *enc, int prop);
-extern DmtxPassFail dmtxEncodeDataMatrix(DmtxEncode *enc, int n, unsigned char *s);
-extern DmtxPassFail dmtxEncodeDataMosaic(DmtxEncode *enc, int n, unsigned char *s);
+DMTX_DECL DmtxEncode *dmtxEncodeCreate(void);
+DMTX_DECL DmtxPassFail dmtxEncodeDestroy(DmtxEncode **enc);
+DMTX_DECL DmtxPassFail dmtxEncodeSetProp(DmtxEncode *enc, int prop, int value);
+DMTX_DECL int dmtxEncodeGetProp(DmtxEncode *enc, int prop);
+DMTX_DECL DmtxPassFail dmtxEncodeDataMatrix(DmtxEncode *enc, int n, unsigned char *s);
+DMTX_DECL DmtxPassFail dmtxEncodeDataMosaic(DmtxEncode *enc, int n, unsigned char *s);
 
 /* dmtxdecode.c */
-extern DmtxDecode *dmtxDecodeCreate(DmtxImage *img, int scale);
-extern DmtxPassFail dmtxDecodeDestroy(DmtxDecode **dec);
-extern DmtxPassFail dmtxDecodeSetProp(DmtxDecode *dec, int prop, int value);
-extern int dmtxDecodeGetProp(DmtxDecode *dec, int prop);
-extern /*@exposed@*/ unsigned char *dmtxDecodeGetCache(DmtxDecode *dec, int x, int y);
-extern DmtxPassFail dmtxDecodeGetPixelValue(DmtxDecode *dec, int x, int y, int channel, /*@out@*/ int *value);
-extern DmtxMessage *dmtxDecodeMatrixRegion(DmtxDecode *dec, DmtxRegion *reg, int fix);
-extern DmtxMessage *dmtxDecodeMosaicRegion(DmtxDecode *dec, DmtxRegion *reg, int fix);
-extern unsigned char *dmtxDecodeCreateDiagnostic(DmtxDecode *dec, /*@out@*/ int *totalBytes, /*@out@*/ int *headerBytes, int style);
+DMTX_DECL DmtxDecode *dmtxDecodeCreate(DmtxImage *img, int scale);
+DMTX_DECL DmtxPassFail dmtxDecodeDestroy(DmtxDecode **dec);
+DMTX_DECL DmtxPassFail dmtxDecodeSetProp(DmtxDecode *dec, int prop, int value);
+DMTX_DECL int dmtxDecodeGetProp(DmtxDecode *dec, int prop);
+DMTX_DECL /*@exposed@*/ unsigned char *dmtxDecodeGetCache(DmtxDecode *dec, int x, int y);
+DMTX_DECL DmtxPassFail dmtxDecodeGetPixelValue(DmtxDecode *dec, int x, int y, int channel, /*@out@*/ int *value);
+DMTX_DECL DmtxMessage *dmtxDecodeMatrixRegion(DmtxDecode *dec, DmtxRegion *reg, int fix);
+DMTX_DECL DmtxMessage *dmtxDecodeMosaicRegion(DmtxDecode *dec, DmtxRegion *reg, int fix);
+DMTX_DECL unsigned char *dmtxDecodeCreateDiagnostic(DmtxDecode *dec, /*@out@*/ int *totalBytes, /*@out@*/ int *headerBytes, int style);
 
 /* dmtxregion.c */
-extern DmtxRegion *dmtxRegionCreate(DmtxRegion *reg);
-extern DmtxPassFail dmtxRegionDestroy(DmtxRegion **reg);
-extern DmtxRegion *dmtxRegionFindNext(DmtxDecode *dec, DmtxTime *timeout);
-extern DmtxRegion *dmtxRegionScanPixel(DmtxDecode *dec, int x, int y);
-extern DmtxPassFail dmtxRegionUpdateCorners(DmtxDecode *dec, DmtxRegion *reg, DmtxVector2 p00,
+DMTX_DECL DmtxRegion *dmtxRegionCreate(DmtxRegion *reg);
+DMTX_DECL DmtxPassFail dmtxRegionDestroy(DmtxRegion **reg);
+DMTX_DECL DmtxRegion *dmtxRegionFindNext(DmtxDecode *dec, DmtxTime *timeout);
+DMTX_DECL DmtxRegion *dmtxRegionScanPixel(DmtxDecode *dec, int x, int y);
+DMTX_DECL DmtxPassFail dmtxRegionUpdateCorners(DmtxDecode *dec, DmtxRegion *reg, DmtxVector2 p00,
       DmtxVector2 p10, DmtxVector2 p11, DmtxVector2 p01);
-extern DmtxPassFail dmtxRegionUpdateXfrms(DmtxDecode *dec, DmtxRegion *reg);
+DMTX_DECL DmtxPassFail dmtxRegionUpdateXfrms(DmtxDecode *dec, DmtxRegion *reg);
 
 /* dmtxmessage.c */
-extern DmtxMessage *dmtxMessageCreate(int sizeIdx, int symbolFormat);
-extern DmtxPassFail dmtxMessageDestroy(DmtxMessage **msg);
+DMTX_DECL DmtxMessage *dmtxMessageCreate(int sizeIdx, int symbolFormat);
+DMTX_DECL DmtxPassFail dmtxMessageDestroy(DmtxMessage **msg);
 
 /* dmtximage.c */
-extern DmtxImage *dmtxImageCreate(unsigned char *pxl, int width, int height, int pack);
-extern DmtxPassFail dmtxImageDestroy(DmtxImage **img);
-extern DmtxPassFail dmtxImageSetChannel(DmtxImage *img, int channelStart, int bitsPerChannel);
-extern DmtxPassFail dmtxImageSetProp(DmtxImage *img, int prop, int value);
-extern int dmtxImageGetProp(DmtxImage *img, int prop);
-extern int dmtxImageGetByteOffset(DmtxImage *img, int x, int y);
-extern DmtxPassFail dmtxImageGetPixelValue(DmtxImage *img, int x, int y, int channel, /*@out@*/ int *value);
-extern DmtxPassFail dmtxImageSetPixelValue(DmtxImage *img, int x, int y, int channel, int value);
-extern DmtxBoolean dmtxImageContainsInt(DmtxImage *img, int margin, int x, int y);
-extern DmtxBoolean dmtxImageContainsFloat(DmtxImage *img, double x, double y);
+DMTX_DECL DmtxImage *dmtxImageCreate(unsigned char *pxl, int width, int height, int pack);
+DMTX_DECL DmtxPassFail dmtxImageDestroy(DmtxImage **img);
+DMTX_DECL DmtxPassFail dmtxImageSetChannel(DmtxImage *img, int channelStart, int bitsPerChannel);
+DMTX_DECL DmtxPassFail dmtxImageSetProp(DmtxImage *img, int prop, int value);
+DMTX_DECL int dmtxImageGetProp(DmtxImage *img, int prop);
+DMTX_DECL int dmtxImageGetByteOffset(DmtxImage *img, int x, int y);
+DMTX_DECL DmtxPassFail dmtxImageGetPixelValue(DmtxImage *img, int x, int y, int channel, /*@out@*/ int *value);
+DMTX_DECL DmtxPassFail dmtxImageSetPixelValue(DmtxImage *img, int x, int y, int channel, int value);
+DMTX_DECL DmtxBoolean dmtxImageContainsInt(DmtxImage *img, int margin, int x, int y);
+DMTX_DECL DmtxBoolean dmtxImageContainsFloat(DmtxImage *img, double x, double y);
 
 /* dmtxvector2.c */
-extern DmtxVector2 *dmtxVector2AddTo(DmtxVector2 *v1, const DmtxVector2 *v2);
-extern DmtxVector2 *dmtxVector2Add(/*@out@*/ DmtxVector2 *vOut, const DmtxVector2 *v1, const DmtxVector2 *v2);
-extern DmtxVector2 *dmtxVector2SubFrom(DmtxVector2 *v1, const DmtxVector2 *v2);
-extern DmtxVector2 *dmtxVector2Sub(/*@out@*/ DmtxVector2 *vOut, const DmtxVector2 *v1, const DmtxVector2 *v2);
-extern DmtxVector2 *dmtxVector2ScaleBy(DmtxVector2 *v, double s);
-extern DmtxVector2 *dmtxVector2Scale(/*@out@*/ DmtxVector2 *vOut, const DmtxVector2 *v, double s);
-extern double dmtxVector2Cross(const DmtxVector2 *v1, const DmtxVector2 *v2);
-extern double dmtxVector2Norm(DmtxVector2 *v);
-extern double dmtxVector2Dot(const DmtxVector2 *v1, const DmtxVector2 *v2);
-extern double dmtxVector2Mag(const DmtxVector2 *v);
-extern double dmtxDistanceFromRay2(const DmtxRay2 *r, const DmtxVector2 *q);
-extern double dmtxDistanceAlongRay2(const DmtxRay2 *r, const DmtxVector2 *q);
-extern DmtxPassFail dmtxRay2Intersect(/*@out@*/ DmtxVector2 *point, const DmtxRay2 *p0, const DmtxRay2 *p1);
-extern DmtxPassFail dmtxPointAlongRay2(/*@out@*/ DmtxVector2 *point, const DmtxRay2 *r, double t);
+DMTX_DECL DmtxVector2 *dmtxVector2AddTo(DmtxVector2 *v1, const DmtxVector2 *v2);
+DMTX_DECL DmtxVector2 *dmtxVector2Add(/*@out@*/ DmtxVector2 *vOut, const DmtxVector2 *v1, const DmtxVector2 *v2);
+DMTX_DECL DmtxVector2 *dmtxVector2SubFrom(DmtxVector2 *v1, const DmtxVector2 *v2);
+DMTX_DECL DmtxVector2 *dmtxVector2Sub(/*@out@*/ DmtxVector2 *vOut, const DmtxVector2 *v1, const DmtxVector2 *v2);
+DMTX_DECL DmtxVector2 *dmtxVector2ScaleBy(DmtxVector2 *v, double s);
+DMTX_DECL DmtxVector2 *dmtxVector2Scale(/*@out@*/ DmtxVector2 *vOut, const DmtxVector2 *v, double s);
+DMTX_DECL double dmtxVector2Cross(const DmtxVector2 *v1, const DmtxVector2 *v2);
+DMTX_DECL double dmtxVector2Norm(DmtxVector2 *v);
+DMTX_DECL double dmtxVector2Dot(const DmtxVector2 *v1, const DmtxVector2 *v2);
+DMTX_DECL double dmtxVector2Mag(const DmtxVector2 *v);
+DMTX_DECL double dmtxDistanceFromRay2(const DmtxRay2 *r, const DmtxVector2 *q);
+DMTX_DECL double dmtxDistanceAlongRay2(const DmtxRay2 *r, const DmtxVector2 *q);
+DMTX_DECL DmtxPassFail dmtxRay2Intersect(/*@out@*/ DmtxVector2 *point, const DmtxRay2 *p0, const DmtxRay2 *p1);
+DMTX_DECL DmtxPassFail dmtxPointAlongRay2(/*@out@*/ DmtxVector2 *point, const DmtxRay2 *r, double t);
 
 /* dmtxmatrix3.c */
-extern void dmtxMatrix3Copy(/*@out@*/ DmtxMatrix3 m0, DmtxMatrix3 m1);
-extern void dmtxMatrix3Identity(/*@out@*/ DmtxMatrix3 m);
-extern void dmtxMatrix3Translate(/*@out@*/ DmtxMatrix3 m, double tx, double ty);
-extern void dmtxMatrix3Rotate(/*@out@*/ DmtxMatrix3 m, double angle);
-extern void dmtxMatrix3Scale(/*@out@*/ DmtxMatrix3 m, double sx, double sy);
-extern void dmtxMatrix3Shear(/*@out@*/ DmtxMatrix3 m, double shx, double shy);
-extern void dmtxMatrix3LineSkewTop(/*@out@*/ DmtxMatrix3 m, double b0, double b1, double sz);
-extern void dmtxMatrix3LineSkewTopInv(/*@out@*/ DmtxMatrix3 m, double b0, double b1, double sz);
-extern void dmtxMatrix3LineSkewSide(/*@out@*/ DmtxMatrix3 m, double b0, double b1, double sz);
-extern void dmtxMatrix3LineSkewSideInv(/*@out@*/ DmtxMatrix3 m, double b0, double b1, double sz);
-extern void dmtxMatrix3Multiply(/*@out@*/ DmtxMatrix3 mOut, DmtxMatrix3 m0, DmtxMatrix3 m1);
-extern void dmtxMatrix3MultiplyBy(DmtxMatrix3 m0, DmtxMatrix3 m1);
-extern int dmtxMatrix3VMultiply(/*@out@*/ DmtxVector2 *vOut, DmtxVector2 *vIn, DmtxMatrix3 m);
-extern int dmtxMatrix3VMultiplyBy(DmtxVector2 *v, DmtxMatrix3 m);
-extern void dmtxMatrix3Print(DmtxMatrix3 m);
+DMTX_DECL void dmtxMatrix3Copy(/*@out@*/ DmtxMatrix3 m0, DmtxMatrix3 m1);
+DMTX_DECL void dmtxMatrix3Identity(/*@out@*/ DmtxMatrix3 m);
+DMTX_DECL void dmtxMatrix3Translate(/*@out@*/ DmtxMatrix3 m, double tx, double ty);
+DMTX_DECL void dmtxMatrix3Rotate(/*@out@*/ DmtxMatrix3 m, double angle);
+DMTX_DECL void dmtxMatrix3Scale(/*@out@*/ DmtxMatrix3 m, double sx, double sy);
+DMTX_DECL void dmtxMatrix3Shear(/*@out@*/ DmtxMatrix3 m, double shx, double shy);
+DMTX_DECL void dmtxMatrix3LineSkewTop(/*@out@*/ DmtxMatrix3 m, double b0, double b1, double sz);
+DMTX_DECL void dmtxMatrix3LineSkewTopInv(/*@out@*/ DmtxMatrix3 m, double b0, double b1, double sz);
+DMTX_DECL void dmtxMatrix3LineSkewSide(/*@out@*/ DmtxMatrix3 m, double b0, double b1, double sz);
+DMTX_DECL void dmtxMatrix3LineSkewSideInv(/*@out@*/ DmtxMatrix3 m, double b0, double b1, double sz);
+DMTX_DECL void dmtxMatrix3Multiply(/*@out@*/ DmtxMatrix3 mOut, DmtxMatrix3 m0, DmtxMatrix3 m1);
+DMTX_DECL void dmtxMatrix3MultiplyBy(DmtxMatrix3 m0, DmtxMatrix3 m1);
+DMTX_DECL int dmtxMatrix3VMultiply(/*@out@*/ DmtxVector2 *vOut, DmtxVector2 *vIn, DmtxMatrix3 m);
+DMTX_DECL int dmtxMatrix3VMultiplyBy(DmtxVector2 *v, DmtxMatrix3 m);
+DMTX_DECL void dmtxMatrix3Print(DmtxMatrix3 m);
 
 /* dmtxsymbol.c */
-extern int dmtxSymbolModuleStatus(DmtxMessage *mapping, int sizeIdx, int row, int col);
-extern int dmtxGetSymbolAttribute(int attribute, int sizeIdx);
-extern int dmtxGetBlockDataSize(int sizeIdx, int blockIdx);
+DMTX_DECL int dmtxSymbolModuleStatus(DmtxMessage *mapping, int sizeIdx, int row, int col);
+DMTX_DECL int dmtxGetSymbolAttribute(int attribute, int sizeIdx);
+DMTX_DECL int dmtxGetBlockDataSize(int sizeIdx, int blockIdx);
 
 /* dmtxbytelist.c */
-extern DmtxByteList dmtxByteListBuild(DmtxByte *storage, int capacity);
-extern void dmtxByteListInit(DmtxByteList *list, int length, DmtxByte value, DmtxPassFail *passFail);
-extern void dmtxByteListClear(DmtxByteList *list);
-extern DmtxBoolean dmtxByteListHasCapacity(DmtxByteList *list);
-extern void dmtxByteListCopy(DmtxByteList *dst, const DmtxByteList *src, DmtxPassFail *passFail);
-extern void dmtxByteListPush(DmtxByteList *list, DmtxByte value, DmtxPassFail *passFail);
-extern DmtxByte dmtxByteListPop(DmtxByteList *list, DmtxPassFail *passFail);
-extern void dmtxByteListPrint(DmtxByteList *list, char *prefix);
+DMTX_DECL DmtxByteList dmtxByteListBuild(DmtxByte *storage, int capacity);
+DMTX_DECL void dmtxByteListInit(DmtxByteList *list, int length, DmtxByte value, DmtxPassFail *passFail);
+DMTX_DECL void dmtxByteListClear(DmtxByteList *list);
+DMTX_DECL DmtxBoolean dmtxByteListHasCapacity(DmtxByteList *list);
+DMTX_DECL void dmtxByteListCopy(DmtxByteList *dst, const DmtxByteList *src, DmtxPassFail *passFail);
+DMTX_DECL void dmtxByteListPush(DmtxByteList *list, DmtxByte value, DmtxPassFail *passFail);
+DMTX_DECL DmtxByte dmtxByteListPop(DmtxByteList *list, DmtxPassFail *passFail);
+DMTX_DECL void dmtxByteListPrint(DmtxByteList *list, char *prefix);
 
-extern char *dmtxVersion(void);
+DMTX_DECL char *dmtxVersion(void);
 
 #ifdef __cplusplus
 }

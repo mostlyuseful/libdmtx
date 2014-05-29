@@ -5,22 +5,6 @@
 #include <cstdint>
 #include "dmtx.h"
 
-#   if (defined(WINDOWS) || defined(WIN32)) && !defined(DMTX_STATIC)
-#       ifndef DMTX_DECL
-#           ifdef DMTX_BUILD_DLL
-            /* We are building this library */
-#           define DMTX_DECL __declspec(dllexport)
-#           else
-            /* We are using this library */
-#           define DMTX_DECL __declspec(dllimport)
-#           endif
-#       endif
-#   else
-#       ifndef DMTX_DECL
-#       define DMTX_DECL 
-#       endif
-#   endif
-
 namespace dmtx
 {
     struct pack
@@ -28,13 +12,13 @@ namespace dmtx
         enum type
         {
             /* Custom format */
-            custom            = 100,
+            custom              = 100,
             /* 1 bpp */
-            k1             = 200,
+            k1                  = 200,
             /* 8 bpp grayscale */
-            k8             = 300,
+            k8                  = 300,
             /* 16 bpp formats */
-            rgb16          = 400,
+            rgb16               = 400,
             rgbx16,
             xrgb16,
             bgr16,
@@ -42,11 +26,11 @@ namespace dmtx
             xbgr16,
             ycbcr16,
             /* 24 bpp formats */
-            rgb24          = 500,
+            rgb24               = 500,
             bgr24,
             ycbcr24,
             /* 32 bpp formats */
-            rgbx32         = 600,
+            rgbx32              = 600,
             xrgb32,
             bgrx32,
             xbgr32,
@@ -96,6 +80,11 @@ namespace dmtx
         {
             return _pimpl.get();
         }
+        
+        void swap(image& other)
+        {
+            _pimpl.swap(other._pimpl);
+        }
 
     private:
 
@@ -125,6 +114,11 @@ namespace dmtx
         DmtxDecode* native_handle() const
         {
             return _pimpl.get();
+        }
+        
+        void swap(decoder& other)
+        {
+            _pimpl.swap(other._pimpl);
         }
 
     private:

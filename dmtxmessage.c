@@ -17,7 +17,7 @@
  * \param  symbolFormat DmtxFormatMatrix | DmtxFormatMosaic
  * \return Address of allocated memory
  */
-extern DmtxMessage *
+DmtxMessage *
 dmtxMessageCreate(int sizeIdx, int symbolFormat)
 {
    DmtxMessage *message;
@@ -74,7 +74,7 @@ dmtxMessageCreate(int sizeIdx, int symbolFormat)
  * \param  message
  * \return void
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxMessageDestroy(DmtxMessage **msg)
 {
    if(msg == NULL || *msg == NULL)

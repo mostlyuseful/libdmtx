@@ -18,7 +18,7 @@
  * \brief  Initialize encode struct with default values
  * \return Initialized DmtxEncode struct
  */
-extern DmtxEncode *
+DmtxEncode *
 dmtxEncodeCreate(void)
 {
    DmtxEncode *enc;
@@ -54,7 +54,7 @@ dmtxEncodeCreate(void)
  * \param  enc
  * \return void
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxEncodeDestroy(DmtxEncode **enc)
 {
    if(enc == NULL || *enc == NULL)
@@ -83,7 +83,7 @@ dmtxEncodeDestroy(DmtxEncode **enc)
  * \param  value
  * \return DmtxPass | DmtxFail
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxEncodeSetProp(DmtxEncode *enc, int prop, int value)
 {
    switch(prop) {
@@ -128,7 +128,7 @@ dmtxEncodeSetProp(DmtxEncode *enc, int prop, int value)
  * \param  prop
  * \return value
  */
-extern int
+int
 dmtxEncodeGetProp(DmtxEncode *enc, int prop)
 {
    switch(prop) {
@@ -153,7 +153,7 @@ dmtxEncodeGetProp(DmtxEncode *enc, int prop)
  * \param  sizeIdxRequest
  * \return DmtxPass | DmtxFail
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxEncodeDataMatrix(DmtxEncode *enc, int inputSize, unsigned char *inputString)
 {
    int sizeIdx;
@@ -242,7 +242,7 @@ dmtxEncodeDataMatrix(DmtxEncode *enc, int inputSize, unsigned char *inputString)
  * \param  sizeIdxRequest
  * \return DmtxPass | DmtxFail
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxEncodeDataMosaic(DmtxEncode *enc, int inputSize, unsigned char *inputString)
 {
    unsigned char *inputStringR, *inputStringG, *inputStringB;

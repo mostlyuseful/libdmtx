@@ -17,7 +17,7 @@
  * \param  img
  * \return Initialized DmtxDecode struct
  */
-extern DmtxDecode *
+DmtxDecode *
 dmtxDecodeCreate(DmtxImage *img, int scale)
 {
    DmtxDecode *dec;
@@ -60,7 +60,7 @@ dmtxDecodeCreate(DmtxImage *img, int scale)
  * \param  dec
  * \return void
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxDecodeDestroy(DmtxDecode **dec)
 {
    if(dec == NULL || *dec == NULL)
@@ -83,7 +83,7 @@ dmtxDecodeDestroy(DmtxDecode **dec)
  * \param  value
  * \return DmtxPass | DmtxFail
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxDecodeSetProp(DmtxDecode *dec, int prop, int value)
 {
    switch(prop) {
@@ -143,7 +143,7 @@ dmtxDecodeSetProp(DmtxDecode *dec, int prop, int value)
  * \param  prop
  * \return value
  */
-extern int
+int
 dmtxDecodeGetProp(DmtxDecode *dec, int prop)
 {
    switch(prop) {
@@ -187,7 +187,7 @@ dmtxDecodeGetProp(DmtxDecode *dec, int prop)
  * \param  Scaled y coordinate
  * \return Scaled pixel offset
  */
-extern unsigned char *
+unsigned char *
 dmtxDecodeGetCache(DmtxDecode *dec, int x, int y)
 {
    int width, height;
@@ -210,7 +210,7 @@ dmtxDecodeGetCache(DmtxDecode *dec, int x, int y)
  *
  *
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxDecodeGetPixelValue(DmtxDecode *dec, int x, int y, int channel, int *value)
 {
    int xUnscaled, yUnscaled;
@@ -313,7 +313,7 @@ CacheFillQuad(DmtxDecode *dec, DmtxPixelLoc p0, DmtxPixelLoc p1, DmtxPixelLoc p2
  * \param  fix
  * \return Decoded message
  */
-extern DmtxMessage *
+DmtxMessage *
 dmtxDecodeMatrixRegion(DmtxDecode *dec, DmtxRegion *reg, int fix)
 {
    DmtxMessage *msg;
@@ -372,7 +372,7 @@ dmtxDecodeMatrixRegion(DmtxDecode *dec, DmtxRegion *reg, int fix)
  * \param  fix
  * \return Decoded message
  */
-extern DmtxMessage *
+DmtxMessage *
 dmtxDecodeMosaicRegion(DmtxDecode *dec, DmtxRegion *reg, int fix)
 {
    int offset;
@@ -436,7 +436,7 @@ dmtxDecodeMosaicRegion(DmtxDecode *dec, DmtxRegion *reg, int fix)
  *
  *
  */
-extern unsigned char *
+unsigned char *
 dmtxDecodeCreateDiagnostic(DmtxDecode *dec, int *totalBytes, int *headerBytes, int style)
 {
    int i, row, col;
