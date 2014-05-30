@@ -67,13 +67,27 @@ namespace dmtx
 
     struct image
     {
-        image(std::uint8_t* pxl, int width, int height, int pack)
-            : _pimpl(dmtxImageCreate(pxl, width, height, pack))
+        image(void* pxl, int width, int height, int pack)
+          : _pimpl(dmtxImageCreate(static_cast<std::uint8_t*>(pxl), width, height, pack))
+        {}
+        
+        explicit image(DmtxImage* ptr)
+          : _pimpl(ptr)
         {}
 
         void set_channel(int channelStart, int bitsPerChannel) const
         {
             dmtxImageSetChannel(native_handle(), channelStart, bitsPerChannel);
+        }
+
+        void flip(flip::type val) const
+        {
+            dmtxImageSetProp(native_handle(), DmtxPropImageFlip, val);
+        }
+
+        flip::type flip() const
+        {
+            dmtxImageGetProp(native_handle(), DmtxPropImageFlip);
         }
 
         DmtxImage* native_handle() const
@@ -98,7 +112,7 @@ namespace dmtx
     struct decoder
     {
         explicit decoder(image const& img, int scale = 1)
-            : _pimpl(dmtxDecodeCreate(img.native_handle(), scale))
+          : _pimpl(dmtxDecodeCreate(img.native_handle(), scale))
         {}
 
         region_ptr next_region() const
@@ -109,6 +123,13 @@ namespace dmtx
         message_ptr decode(region_ptr const& reg, int fix = DmtxUndefined) const
         {
             return message_ptr(dmtxDecodeMatrixRegion(native_handle(), reg.get(), fix));
+        }
+        
+        message_ptr operator()(int fix = DmtxUndefined) const
+        {
+            if (auto reg = next_region())
+                return decode(reg, fix);
+            return nullptr;
         }
 
         DmtxDecode* native_handle() const
@@ -124,6 +145,44 @@ namespace dmtx
     private:
 
         detail::handle<DmtxDecode, dmtxDecodeDestroy>::type _pimpl;
+    };
+    
+    struct encoder
+    {
+        encoder()
+          : _pimpl(dmtxEncodeCreate())
+        {}
+        
+        image operator()(void const* msg, int n) const
+        {
+            auto pimpl = native_handle();
+            dmtxEncodeDataMatrix(pimpl, n
+              , static_cast<std::uint8_t*>(const_cast<void*>(msg)));
+            auto img = pimpl->image;
+            pimpl->image = nullptr;
+            return image(img);
+        }
+        
+        image operator()(std::string const& msg) const
+        {
+            return operator()(
+                reinterpret_cast<std::uint8_t const*>(msg.data())
+              , msg.size());
+        }
+        
+        DmtxEncode* native_handle() const
+        {
+            return _pimpl.get();
+        }
+        
+        void swap(encoder& other)
+        {
+            _pimpl.swap(other._pimpl);
+        }
+        
+    private:
+
+        detail::handle<DmtxEncode, dmtxEncodeDestroy>::type _pimpl;
     };
 }
 
