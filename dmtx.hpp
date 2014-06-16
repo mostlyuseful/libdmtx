@@ -1,6 +1,7 @@
 #ifndef DMTX_HPP_INCLUDED
 #define DMTX_HPP_INCLUDED
 
+#include <string>
 #include <memory>
 #include <cstdint>
 #include "dmtx.h"
@@ -67,8 +68,8 @@ namespace dmtx
 
     struct image
     {
-        image(void* pxl, int width, int height, int pack)
-          : _pimpl(dmtxImageCreate(static_cast<std::uint8_t*>(pxl), width, height, pack))
+        image(void const* pxl, int width, int height, int pack)
+          : _pimpl(dmtxImageCreate(static_cast<std::uint8_t*>(const_cast<void*>(pxl)), width, height, pack))
         {}
         
         explicit image(DmtxImage* ptr)
