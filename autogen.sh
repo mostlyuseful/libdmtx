@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Create empty m4 directory if missing
 if [[ ! -d "m4" ]]; then
