@@ -18,7 +18,7 @@
  * \param  None
  * \return Initialized DmtxRegion struct
  */
-extern DmtxRegion *
+DmtxRegion *
 dmtxRegionCreate(DmtxRegion *reg)
 {
    DmtxRegion *regCopy;
@@ -37,7 +37,7 @@ dmtxRegionCreate(DmtxRegion *reg)
  * \param  reg
  * \return void
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxRegionDestroy(DmtxRegion **reg)
 {
    if(reg == NULL || *reg == NULL)
@@ -56,7 +56,7 @@ dmtxRegionDestroy(DmtxRegion **reg)
  * \param  timeout Pointer to timeout time (NULL if none)
  * \return Detected region (if found)
  */
-extern DmtxRegion *
+DmtxRegion *
 dmtxRegionFindNext(DmtxDecode *dec, DmtxTime *timeout)
 {
    int locStatus;
@@ -88,7 +88,7 @@ dmtxRegionFindNext(DmtxDecode *dec, DmtxTime *timeout)
  * \param  loc Pixel location
  * \return Detected region (if any)
  */
-extern DmtxRegion *
+DmtxRegion *
 dmtxRegionScanPixel(DmtxDecode *dec, int x, int y)
 {
    unsigned char *cache;
@@ -368,7 +368,7 @@ DistanceSquared(DmtxPixelLoc a, DmtxPixelLoc b)
  *
  *
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxRegionUpdateCorners(DmtxDecode *dec, DmtxRegion *reg, DmtxVector2 p00,
       DmtxVector2 p10, DmtxVector2 p11, DmtxVector2 p01)
 {
@@ -471,7 +471,7 @@ dmtxRegionUpdateCorners(DmtxDecode *dec, DmtxRegion *reg, DmtxVector2 p00,
  *
  *
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxRegionUpdateXfrms(DmtxDecode *dec, DmtxRegion *reg)
 {
    double radians;

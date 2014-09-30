@@ -17,7 +17,7 @@
  * \param  sizeIdx
  * \return Attribute value
  */
-extern int
+int
 dmtxGetSymbolAttribute(int attribute, int sizeIdx)
 {
    static const int symbolRows[] = { 10, 12, 14, 16, 18, 20,  22,  24,  26,
@@ -118,7 +118,7 @@ dmtxGetSymbolAttribute(int attribute, int sizeIdx)
  * \param  blockIdx
  * \return Attribute value
  */
-extern int
+int
 dmtxGetBlockDataSize(int sizeIdx, int blockIdx)
 {
    int symbolDataWords;

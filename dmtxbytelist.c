@@ -14,7 +14,7 @@
  *
  *
  */
-extern DmtxByteList
+DmtxByteList
 dmtxByteListBuild(DmtxByte *storage, int capacity)
 {
    DmtxByteList list;
@@ -30,7 +30,7 @@ dmtxByteListBuild(DmtxByte *storage, int capacity)
  *
  *
  */
-extern void
+void
 dmtxByteListInit(DmtxByteList *list, int length, DmtxByte value, DmtxPassFail *passFail)
 {
    if(length > list->capacity)
@@ -49,7 +49,7 @@ dmtxByteListInit(DmtxByteList *list, int length, DmtxByte value, DmtxPassFail *p
  *
  *
  */
-extern void
+void
 dmtxByteListClear(DmtxByteList *list)
 {
    memset(list->b, 0x00, sizeof(DmtxByte) * list->capacity);
@@ -60,7 +60,7 @@ dmtxByteListClear(DmtxByteList *list)
  *
  *
  */
-extern DmtxBoolean
+DmtxBoolean
 dmtxByteListHasCapacity(DmtxByteList *list)
 {
    return (list->length < list->capacity) ? DmtxTrue : DmtxFalse;
@@ -70,7 +70,7 @@ dmtxByteListHasCapacity(DmtxByteList *list)
  *
  *
  */
-extern void
+void
 dmtxByteListCopy(DmtxByteList *dst, const DmtxByteList *src, DmtxPassFail *passFail)
 {
    int length;
@@ -94,7 +94,7 @@ dmtxByteListCopy(DmtxByteList *dst, const DmtxByteList *src, DmtxPassFail *passF
  *
  *
  */
-extern void
+void
 dmtxByteListPush(DmtxByteList *list, DmtxByte value, DmtxPassFail *passFail)
 {
    if(list->length >= list->capacity)
@@ -112,7 +112,7 @@ dmtxByteListPush(DmtxByteList *list, DmtxByte value, DmtxPassFail *passFail)
  *
  *
  */
-extern DmtxByte
+DmtxByte
 dmtxByteListPop(DmtxByteList *list, DmtxPassFail *passFail)
 {
    *passFail = (list->length > 0) ? DmtxPass : DmtxFail;
@@ -124,7 +124,7 @@ dmtxByteListPop(DmtxByteList *list, DmtxPassFail *passFail)
  *
  *
  */
-extern void
+void
 dmtxByteListPrint(DmtxByteList *list, char *prefix)
 {
    int i;

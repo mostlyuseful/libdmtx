@@ -56,7 +56,7 @@
  * \param  XXX
  * \return XXX
  */
-extern DmtxImage *
+DmtxImage *
 dmtxImageCreate(unsigned char *pxl, int width, int height, int pack)
 {
    DmtxPassFail err;
@@ -144,7 +144,7 @@ dmtxImageCreate(unsigned char *pxl, int width, int height, int pack)
  * \param  img pointer to img location
  * \return DmtxFail | DmtxPass
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxImageDestroy(DmtxImage **img)
 {
    if(img == NULL || *img == NULL)
@@ -161,7 +161,7 @@ dmtxImageDestroy(DmtxImage **img)
  *
  *
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxImageSetChannel(DmtxImage *img, int channelStart, int bitsPerChannel)
 {
    if(img->channelCount >= 4) /* IMAGE_MAX_CHANNEL */
@@ -183,7 +183,7 @@ dmtxImageSetChannel(DmtxImage *img, int channelStart, int bitsPerChannel)
  * \param  img pointer to image
  * \return image width
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxImageSetProp(DmtxImage *img, int prop, int value)
 {
    if(img == NULL)
@@ -209,7 +209,7 @@ dmtxImageSetProp(DmtxImage *img, int prop, int value)
  * \param  img pointer to image
  * \return image width
  */
-extern int
+int
 dmtxImageGetProp(DmtxImage *img, int prop)
 {
    if(img == NULL)
@@ -248,7 +248,7 @@ dmtxImageGetProp(DmtxImage *img, int prop)
  * \param  y coordinate
  * \return pixel byte offset
  */
-extern int
+int
 dmtxImageGetByteOffset(DmtxImage *img, int x, int y)
 {
    assert(img != NULL);
@@ -267,7 +267,7 @@ dmtxImageGetByteOffset(DmtxImage *img, int x, int y)
  *
  *
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxImageGetPixelValue(DmtxImage *img, int x, int y, int channel, int *value)
 {
    int offset;
@@ -312,7 +312,7 @@ dmtxImageGetPixelValue(DmtxImage *img, int x, int y, int channel, int *value)
  *
  *
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxImageSetPixelValue(DmtxImage *img, int x, int y, int channel, int value)
 {
    int offset;
@@ -361,7 +361,7 @@ dmtxImageSetPixelValue(DmtxImage *img, int x, int y, int channel, int value)
  * \param  y coordinate
  * \return DmtxTrue | DmtxFalse
  */
-extern DmtxBoolean
+DmtxBoolean
 dmtxImageContainsInt(DmtxImage *img, int margin, int x, int y)
 {
    assert(img != NULL);
@@ -380,7 +380,7 @@ dmtxImageContainsInt(DmtxImage *img, int margin, int x, int y)
  * \param  y coordinate
  * \return DmtxTrue | DmtxFalse
  */
-extern DmtxBoolean
+DmtxBoolean
 dmtxImageContainsFloat(DmtxImage *img, double x, double y)
 {
    assert(img != NULL);

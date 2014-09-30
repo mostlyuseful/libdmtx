@@ -15,7 +15,7 @@
  *
  *
  */
-extern DmtxVector2 *
+DmtxVector2 *
 dmtxVector2AddTo(DmtxVector2 *v1, const DmtxVector2 *v2)
 {
    v1->X += v2->X;
@@ -28,7 +28,7 @@ dmtxVector2AddTo(DmtxVector2 *v1, const DmtxVector2 *v2)
  *
  *
  */
-extern DmtxVector2 *
+DmtxVector2 *
 dmtxVector2Add(DmtxVector2 *vOut, const DmtxVector2 *v1, const DmtxVector2 *v2)
 {
    *vOut = *v1;
@@ -40,7 +40,7 @@ dmtxVector2Add(DmtxVector2 *vOut, const DmtxVector2 *v1, const DmtxVector2 *v2)
  *
  *
  */
-extern DmtxVector2 *
+DmtxVector2 *
 dmtxVector2SubFrom(DmtxVector2 *v1, const DmtxVector2 *v2)
 {
    v1->X -= v2->X;
@@ -53,7 +53,7 @@ dmtxVector2SubFrom(DmtxVector2 *v1, const DmtxVector2 *v2)
  *
  *
  */
-extern DmtxVector2 *
+DmtxVector2 *
 dmtxVector2Sub(DmtxVector2 *vOut, const DmtxVector2 *v1, const DmtxVector2 *v2)
 {
    *vOut = *v1;
@@ -65,7 +65,7 @@ dmtxVector2Sub(DmtxVector2 *vOut, const DmtxVector2 *v1, const DmtxVector2 *v2)
  *
  *
  */
-extern DmtxVector2 *
+DmtxVector2 *
 dmtxVector2ScaleBy(DmtxVector2 *v, double s)
 {
    v->X *= s;
@@ -78,7 +78,7 @@ dmtxVector2ScaleBy(DmtxVector2 *v, double s)
  *
  *
  */
-extern DmtxVector2 *
+DmtxVector2 *
 dmtxVector2Scale(DmtxVector2 *vOut, const DmtxVector2 *v, double s)
 {
    *vOut = *v;
@@ -90,7 +90,7 @@ dmtxVector2Scale(DmtxVector2 *vOut, const DmtxVector2 *v, double s)
  *
  *
  */
-extern double
+double
 dmtxVector2Cross(const DmtxVector2 *v1, const DmtxVector2 *v2)
 {
    return (v1->X * v2->Y) - (v1->Y * v2->X);
@@ -100,7 +100,7 @@ dmtxVector2Cross(const DmtxVector2 *v1, const DmtxVector2 *v2)
  *
  *
  */
-extern double
+double
 dmtxVector2Norm(DmtxVector2 *v)
 {
    double mag;
@@ -119,7 +119,7 @@ dmtxVector2Norm(DmtxVector2 *v)
  *
  *
  */
-extern double
+double
 dmtxVector2Dot(const DmtxVector2 *v1, const DmtxVector2 *v2)
 {
    return (v1->X * v2->X) + (v1->Y * v2->Y);
@@ -129,7 +129,7 @@ dmtxVector2Dot(const DmtxVector2 *v1, const DmtxVector2 *v2)
  *
  *
  */
-extern double
+double
 dmtxVector2Mag(const DmtxVector2 *v)
 {
    return sqrt(v->X * v->X + v->Y * v->Y);
@@ -139,7 +139,7 @@ dmtxVector2Mag(const DmtxVector2 *v)
  *
  *
  */
-extern double
+double
 dmtxDistanceFromRay2(const DmtxRay2 *r, const DmtxVector2 *q)
 {
    DmtxVector2 vSubTmp;
@@ -154,7 +154,7 @@ dmtxDistanceFromRay2(const DmtxRay2 *r, const DmtxVector2 *q)
  *
  *
  */
-extern double
+double
 dmtxDistanceAlongRay2(const DmtxRay2 *r, const DmtxVector2 *q)
 {
    DmtxVector2 vSubTmp;
@@ -173,7 +173,7 @@ dmtxDistanceAlongRay2(const DmtxRay2 *r, const DmtxVector2 *q)
  *
  *
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxRay2Intersect(DmtxVector2 *point, const DmtxRay2 *p0, const DmtxRay2 *p1)
 {
    double numer, denom;
@@ -193,7 +193,7 @@ dmtxRay2Intersect(DmtxVector2 *point, const DmtxRay2 *p0, const DmtxRay2 *p1)
  *
  *
  */
-extern DmtxPassFail
+DmtxPassFail
 dmtxPointAlongRay2(DmtxVector2 *point, const DmtxRay2 *r, double t)
 {
    DmtxVector2 vTmp;
